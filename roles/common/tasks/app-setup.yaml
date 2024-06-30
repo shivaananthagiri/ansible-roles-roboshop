@@ -1,6 +1,6 @@
 - name: create roboshop user
-    ansible.builtin.user:
-      name: roboshop
+  ansible.builtin.user:
+    name: roboshop
 
 - name: Recursively remove app directory
   ansible.builtin.file:
