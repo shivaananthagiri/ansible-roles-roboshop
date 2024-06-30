@@ -1,0 +1,55 @@
+ - name: disabled old nodejs and enabled nodejs:18
+    ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
+  - name: installing nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: present
+  - name: createing a user with name roboshop
+    ansible.builtin.user:
+      name: roboshop
+  - name: createing a app directory
+    ansible.builtin.file:
+      path: /app 
+      state: directory
+  - name: downloading catalogue application using a link
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      dest: /tmp
+  - name: un-ziping a package
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+      remote_src: yes
+  - name: installing dependencys
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+  - name: copying catalogue.service file
+    ansible.builtin.copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
+  - name: doing daemon-reload 
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+  - name: copy mongodb repo
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  - name: installing mangodb client
+    ansible.builtin.package:
+      name: mongodb-org-shell
+      state: present
+  - name: catagires count
+    ansible.builtin.command: mongo --host mongodb.ananthagiri.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+    register: product_count  
+  - name: printing the product count 
+    ansible.builtin.debug:
+      msg: "product_count:{{product_count}}"
+  - name: load catalogue data
+    ansible.builtin.command: mongo --host mongodb.ananthagiri.online < /app/schema/catalogue.js
+    when: product_count.stdout == "0"
+  - name: catalogue restart and enabled
+    ansible.builtin.service:
+      name: catalogue
+      state: restarted
+      enabled: yes
