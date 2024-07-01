@@ -24,13 +24,26 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
+# - name: copy roboshop configuration
+#   ansible.builtin.copy:
+#     src: roboshop.conf
+#     dest: /etc/nginx/default.d/roboshop.conf    
+
+# we are commenting the below text and re using it with templates 
+# templates contain .j2 extention and a folder named templates we store our variabes there with some values
+
 - name: copy roboshop configuration
   ansible.builtin.copy:
-    src: roboshop.conf
+    src: roboshop.conf.j2   # using templates
     dest: /etc/nginx/default.d/roboshop.conf
+  notify:
+  - restart nginx   # using handlers
 
-- name: start and enable nginx
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
-    enabled: yes
+# - name: start and enable nginx
+#   ansible.builtin.service:
+#     name: nginx
+#     state: restarted
+#     enabled: yes
+
+# we are doing above operation using handlers by using above syntax
+
