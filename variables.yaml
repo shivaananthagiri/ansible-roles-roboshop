@@ -1,1 +1,10 @@
-MONGODB_HOST: mongodb.ananthagiri.online
+MONGODB_HOST: mongodb.ananthagiri.online # submit your host
+REDIS_HOST: redis.ananthagiri.online
+MYSQL_HOST: mysql.ananthagiri.online
+RABBITMQ_HOST: rabbitmq.ananthagiri.online
+CATALOGUE_HOST: catalogue.ananthagiri.online
+USER_HOST: user.ananthagiri.online
+CART_HOST: cart.ananthagiri.online
+SHIPPING_HOST: shipping.ananthagiri.online
+PAYMENT_HOST: payment.ananthagiri.online
+DISPATCH_HOST: dispatch.ananthagiri.online
