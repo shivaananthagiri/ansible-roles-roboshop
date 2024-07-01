@@ -7,7 +7,7 @@
   - gcc
   - python3-devel
 
-- name: Install dependencies
+- name: Install dependencies of python
   ansible.builtin.command: pip3.6 install -r requirements.txt
   args:
     chdir: /app
