@@ -8,3 +8,4 @@ CART_HOST: cart.ananthagiri.online
 SHIPPING_HOST: shipping.ananthagiri.online
 PAYMENT_HOST: payment.ananthagiri.online
 DISPATCH_HOST: dispatch.ananthagiri.online
+WEB_HOST: web.ananthagiri.online
