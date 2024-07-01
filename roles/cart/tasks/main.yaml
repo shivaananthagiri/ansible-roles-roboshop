@@ -1,0 +1,13 @@
+- name: "calling a task from common"
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup
+- name: "calling a task from common"
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
+- name: "doing systemd setup"
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd
+    
