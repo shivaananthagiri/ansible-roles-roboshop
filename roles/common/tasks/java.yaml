@@ -2,6 +2,7 @@
   ansible.builtin.dnf:
     name: maven
     state: present
+    
 - name: install dependencies
   ansible.builtin.command: mvn clean package
   args:

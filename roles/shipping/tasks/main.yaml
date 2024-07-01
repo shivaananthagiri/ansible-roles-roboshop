@@ -1,11 +1,19 @@
-- name: "calling a task from common"
+- name: "app-setup"
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup
-- name: "calling a task from common"
+
+- name: "installing mavin"
   ansible.builtin.import_role:
     name: common
     tasks_from: java
+
+- name: "mysql setup"
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mysql-setup
+
+
 - name: "doing systemd setup"
   ansible.builtin.import_role:
     name: common
