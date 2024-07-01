@@ -17,7 +17,7 @@
     url: "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
     dest: /tmp
 
-- name: extract catalogue application
+- name: "extract {{component}} application"
   ansible.builtin.unarchive:
     src: "/tmp/{{component}}.zip"
     dest: /app
@@ -28,7 +28,7 @@
   args:
     chdir: /app
 
-- name: Copy catalogue service
+- name: "Copy {{component}} service"
   ansible.builtin.copy:
-    src: catalogue.service
+    src: "{{component}}.service"
     dest: "/etc/systemd/system/{{component}}.service"
