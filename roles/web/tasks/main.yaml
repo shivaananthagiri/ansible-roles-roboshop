@@ -33,7 +33,7 @@
 # templates contain .j2 extention and a folder named templates we store our variabes there with some values
 
 - name: copy roboshop configuration
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: roboshop.conf.j2   # using templates
     dest: /etc/nginx/default.d/roboshop.conf
   notify:
